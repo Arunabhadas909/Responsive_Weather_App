@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./weather.css">
+    <link rel="stylesheet" href=
+    "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+        <link rel="stylesheet" href=
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <link rel="stylesheet" href=
+    "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+    <script src=
+    "https://code.jquery.com/jquery-3.6.0.min.js">
+        </script>
+        	<script src=
+            "https://momentjs.com/downloads/moment.min.js">
+                </script>
+                <script src="./weather.js"></script>
+                <title>Weather App</title>
+</head>
+
+<body>
+
+    <div id="header" style="display: flex; justify-content: center; color: aqua; z-index: 1; font-size: larger; position: absolute; top: 10px; left: 50%;right: 50%; bottom:70%; " >
+        <div>
+            <h1 id="location" style=" text-shadow:-2px 2px 4px rgba(0, 0, 0, 0.5),
+                2px -2px 0 rgba(255, 255, 255, 0.9);">Location</h1> 
+        </div>
+       
+    </div>
+
+      
+
+   
+    <!-- <div > -->
+        <img src="https://t3.ftcdn.net/jpg/09/74/93/64/360_F_974936452_zMsdvroBfXqcAqsUwWJPHqcXIELWkxXI.jpg" alt="Background Image" style=" filter: blur(5px); height:auto; width: 100%; height:100%;background-repeat: repeat;z-index: 0;">
+    <!-- </div> -->
+
+
+    <input type="text" id="locationInput" placeholder="  Enter Location" style="display: flex; justify-content: left; border-radius: 20px; border: double; border-color: grey; box-shadow: inset 2px 2px 2px; position: absolute; top: 10%;right: 85%;bottom: 85%;left: 2%; z-index: 1;word-break: break-all;" onkeydown="callApi()">
+  
+    <div id="weather_components" style="z-index: 1; justify-content: space-between;">
+    <div id="navigatorComps" style="display: flex; flex-direction: row; position: absolute;top: 35%; right: 85%; left: 0%; bottom: 35%;">    
+    <div id="left_navigator" style="display: flex;flex-direction: column; z-index: 1;background-color: #ffffff;opacity: 0.6; position: absolute; border: double; border-color: black; box-shadow: 2px 2px 2px; border-radius: 0px 20px 20px 0px;">
+        <div id="left_navigator_1" style="display: flex; background-color: blanchedalmond; height: 100%;border: solid;border-color: black; border-radius: 0px 20px 0px 0px;">
+           <div id="weather_type" style="border: double; box-shadow: 2px 2px 2px;align-content: center; position: relative;height: 100%;width: 100%;">
+
+            <h4 id="LastUpdatedTag">Last Updated:</h4>
+
+           </div>
+           <div id="weather_type_details_1" style="border: double;display: flex;flex-direction: column;height: auto;border-radius: 0px 20px 0px 0px;">
+                    <div id="lastUpdatedDate" style="border: double; box-shadow: 2px 2px 2px;align-content: center;height: 100%;;border-radius: 0px 10px 0px 0px; position: relative;">
+                            <h4 id="LastUpdatedDate">Date:</h4>
+                    </div>
+                    <div id="lastUpdatedTime"  style="border: double; box-shadow: 2px 2px 2px;align-content: center;height: 100%; ">
+                            <h4 id="LastUpdatedTime">Time:</h4>
+                    </div>
+           </div>
+      
+        </div>
+        <div id="left_navigator_2" style="display: flex;flex-direction: row; background-color: blanchedalmond; height: 93%; border: solid;border-color: black;border-radius: 0px 0px 20px 0px;">
+           <div id="weather_type_details_2" style="border: double;display: flex;flex-direction: row;width: 100%;border-radius: 0px 0px 20px 0px;">
+              
+            <div id="max_temp" style="border: double; box-shadow: 2px 2px 2px;align-content: center; position: relative;width: 100%;">
+                <h4 id="maxTemp"></h4>
+        </div>
+        <div id="min_temp"  style="border: double; box-shadow: 2px 2px 2px;align-content: center;border-radius: 0px 0px 10px 0px;width: 100%;position: relative;">
+                <h4 id="minTemp"></h4>
+        </div>
+        </div>
+        </div>
+        <!-- <div id="left_navigator_3" style="display: flex; background-color: blanchedalmond;opacity: 0.6; height: 100%; border: solid; border-color: black;">
+           
+        </div>
+        <div id="left_navigator_4" style="display: flex; background-color: blanchedalmond;opacity: 0.6; height: 100%; border: solid;border-color: black; border-radius: 0px 0px 20px 20px;">
+           
+        </div> -->
+
+    </div>
+    </div>
+    <div id="right_navigator" class="right_navigator_class" >
+        <div id="right_navigator_subChild_1" class="right_navigator_class_comps">
+            <h5 id="right_navigator_1" ></h5>
+            <hr>
+            <h1 id="right_navigator_1_temp"></h1>
+        </div>
+        <div id="right_navigator_subChild_2" class="right_navigator_class_comps" style="border-radius: 0px;">
+            <h5 id="right_navigator_2" ></h5>
+            <hr>
+            <h1 id="right_navigator_2_temp"></h1>
+        </div>
+        <div id="right_navigator_subChild_3" class="right_navigator_class_comps" style="border-radius: 0px;">
+            <h5 id="right_navigator_3" ></h5>
+            <hr>
+            <h1 id="right_navigator_3_temp"></h1>
+        </div>
+        <div id="right_navigator_subChild_4" class="right_navigator_class_comps" style="border-radius: 0px;">
+            <h5 id="right_navigator_4" ></h5>
+            <hr>
+            <h1 id="right_navigator_4_temp"></h1>
+        </div>
+
+    </div>
+
+    <div id="display_weather" style="z-index: 1; display: flex; justify-content: space-between; flex-direction:column;  background-color:#ffffff; position: absolute;opacity: 0.6; top: 25%;left: 25%; right: 25%;bottom: 25%; border:2px; border-color: black;border-radius: 20px; box-shadow: grey 2px 2px 2px 2px; padding:auto;">
+        <div id="display_weather_items" style="display: flex; justify-content: space-between; flex-direction: column; background: gray;box-shadow: inset 2px 2px 2px 2px;  border-radius: 10px;margin: 5% 5% 5% 5%; position: absolute; height: 85%;align-items: center;position: relative;">
+           <div class="childElementsMain_top">
+            <div class="subChildElementsMain_row_1" id="display_weather_1" style="justify-content: center; " >
+
+                <!-- <img id="img1" src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid; box-shadow: 2px 2px 2px;  " width="50%" height="auto"> -->
+           <h1 id="temperature"  style="text-align: center;" >&#176C</h1>
+            </div>
+            <div class="subChildElementsMain_row_2" id="display_weather_2" style="justify-content:  right; padding: 5px; ">
+    
+                <!-- <img id="img2"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" box-shadow: 2px 2px 2px; border: 2px black solid; " width="50%" height="auto"> -->
+                
+                <li id="rowList_1" ></li>
+                <li id="rowList_2"></li>
+                <li id="rowList_3"></li>
+                <li id="rowList_4"></li>
+                <!-- <li id="rowList_5"></li> -->
+            </div>
+           </div>
+
+        <!-- </div> -->
+        <!-- <div style="display: flex; justify-content: space-between;position:relative; bottom: 10%; left: 10%; "> -->
+        <!-- <div style="display: flex; justify-content: space-around; flex-direction: row; background: gray;box-shadow: inset 2px 2px 2px 2px; padding: 10% 10%; border-radius: 10px;"> -->
+       <span class="childElementsMain_2" style="display: flex;">     
+        <div class="subChildElementsMain">
+        <div class="subChildElementsMain_1" id="display_weather_3" style="justify-content: left; padding-left: 5%; padding-top: 5%;padding-right: 5%;"  >
+
+            <!-- <img id="img3"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+            
+            <dl>
+                <dt id="date_1"></dt>
+                <dt id="time_1"></dt>
+                
+                    <dd id="temp_1"></dd>
+                    <dd id="temp_1_FeelsLike_1"></dd>
+                    <dd id="humidity_1"></dd>
+                    <dd id="windSpeed_1"></dd>
+                
+            </dl>
+        </div>
+        <div class="subChildElementsMain_1" id="display_weather_4" style="justify-content:right; padding-left: 5%; padding-bottom: 5%; padding-right: 5%; ">
+
+        
+            <!-- <img id="img4"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+            
+            <dl>
+                <dt id="date_2"></dt>
+                <dt id="time_2"></dt>
+                
+                    <dd id="temp_2"></dd>
+                    <dd id="temp_2FeelsLike_2"></dd>
+                    <dd id="humidity_2"></dd>
+                    <dd id="windSpeed_2"></dd>
+                
+            </dl>
+        </div>
+        <div class="subChildElementsMain_1" id="display_weather_5" style="justify-content:right; padding-left: 5%; padding-bottom: 5%; padding-right: 5%; ">
+
+        
+            <!-- <img id="img4"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+            
+            <dl>
+                <dt id="date_3"></dt>
+                <dt id="time_3"></dt>
+                
+                    <dd id="temp_3"></dd>
+                    <dd id="temp_3FeelsLike_3"></dd>
+                    <dd id="humidity_3"></dd>
+                    <dd id="windSpeed_3"></dd>
+                
+            </dl>
+        </div>
+        <div class="subChildElementsMain_1" id="display_weather_6" style="justify-content:right; padding-left: 5%; padding-bottom: 5%; padding-right: 5%; ">
+
+        
+            <!-- <img id="img4"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+            
+            <dl>
+                <dt id="date_4"></dt>
+                <dt id="time_4"></dt>
+                
+                    <dd id="temp_4"></dd>
+                    <dd id="temp_4FeelsLike_4"></dd>
+                    <dd id="humidity_4"></dd>
+                    <dd id="windSpeed_4"></dd>
+                
+            </dl>
+        </div>
+        <div class="subChildElementsMain_1" id="display_weather_7" style="justify-content:right; padding-left: 5%; padding-bottom: 5%; padding-right: 5%; ">
+
+        
+            <!-- <img id="img4"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+            
+            <dl>
+                <dt id="date_5"></dt>
+                <dt id="time_5"></dt>
+                
+                    <dd id="temp_5"></dd>
+                    <dd id="temp_5FeelsLike_5"></dd>
+                    <dd id="humidity_5"></dd>
+                    <dd id="windSpeed_5"></dd>
+                
+            </dl>
+        </div>
+        <!-- <div class="subChildElementsMain_1" id="display_weather_" style="justify-content:right; padding-left: 5%; padding-bottom: 5%; padding-right: 5%; ">
+
+        
+            
+            <dl>
+                <dt id="date_6"></dt>
+                <dt id="time_6"></dt>
+                
+                    <dd id="temp_6"></dd>
+                    <dd id="temp_6FeelsLike_6"></dd>
+                    <dd id="humidity_6"></dd>
+                    <dd id="windSpeed_6"></dd>
+                
+            </dl>
+        </div> -->
+
+        </div>
+        
+        <div class="subChildElementsMain">   
+            <!-- <div class="subChildElementsMain_2" id="display_weather_8" style="justify-content: left; padding-left: 5%; padding-top: 5%;"  >
+                <dl>
+                    <dt id="date_5"></dt>
+                    <dt id="time_5"></dt>
+                    
+                        <dd id="temp_5"></dd>
+                        <dd id="temp_5FeelsLike_5"></dd>
+                        <dd id="humidity_5"></dd>
+                        <dd id="windSpeed_5"></dd>
+                    
+                </dl>
+            </div>   -->
+            <div class="subChildElementsMain_2" id="display_weather_8" style="justify-content: left; padding-left: 5%; padding-top: 5%;"  >
+    
+                <!-- <img id="img5"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+                <dl>
+                    <dt id="date_6"></dt>
+                    <dt id="time_6"></dt>
+                    
+                        <dd id="temp_6"></dd>
+                        <dd id="temp_6FeelsLike_6"></dd>
+                        <dd id="humidity_6"></dd>
+                        <dd id="windSpeed_6"></dd>
+                    
+                </dl>
+            </div>
+            <div class="subChildElementsMain_2" id="display_weather_9" style="justify-content:right; padding-left: 5%; padding-bottom: 5%;">
+    
+                <dl>
+                    <dt id="date_7"></dt>
+                    <dt id="time_7"></dt>
+                    
+                        <dd id="temp_7"></dd>
+                        <dd id="temp_7FeelsLike_7"></dd>
+                        <dd id="humidity_7"></dd>
+                        <dd id="windSpeed_7"></dd>
+                    
+                </dl>
+                
+                <!-- <img id="img6"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+                   
+            </div>
+            <div class="subChildElementsMain_2" id="display_weather_10" style="justify-content:right; padding-left: 5%; padding-bottom: 5%;">
+    
+                <dl>
+                    <dt id="date_8"></dt>
+                    <dt id="time_8"></dt>
+                    
+                        <dd id="temp_8"></dd>
+                        <dd id="temp_8FeelsLike_8"></dd>
+                        <dd id="humidity_8"></dd>
+                        <dd id="windSpeed_8"></dd>
+                    
+                </dl>
+                <!-- <img id="img6"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+                   
+            </div>
+            <div class="subChildElementsMain_2" id="display_weather_11" style="justify-content:right; padding-left: 5%; padding-bottom: 5%;">
+    
+                <dl>
+                    <dt id="date_9"></dt>
+                    <dt id="time_9"></dt>
+                    
+                        <dd id="temp_9"></dd>
+                        <dd id="temp_9FeelsLike_9"></dd>
+                        <dd id="humidity_9"></dd>
+                        <dd id="windSpeed_9"></dd>
+                    
+                </dl>
+                <!-- <img id="img6"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+
+            </div>
+            <!-- <div class="subChildElementsMain_2" id="display_weather_6" style="justify-content:right; padding-left: 5%; padding-bottom: 5%;">
+     -->
+                
+                <!-- <img id="img6"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+                   
+            <!-- </div> -->
+            <!-- <div class="subChildElementsMain_2" id="display_weather_6" style="justify-content:right; padding-left: 5%; padding-bottom: 5%;"> -->
+    
+                
+                <!-- <img id="img6"  src="https://img.freepik.com/premium-psd/sunny-rainy-cloudy-day-weather-forecast-icon-meteorological-sign-3d-render-premium-psd_471402-217.jpg?w=360" alt="sunny and rainy" style=" border: 2px black solid;   box-shadow: 2px 2px 2px; " width="50%" height="auto"> -->
+                   
+            <!-- </div> -->
+            </div>
+        </span>
+    </div>
+    </div>
+
+
+ </div>
+    <!-- <div style="z-index: 1; position: absolute; top: 80%;bottom:20%; left: 0%; right:0%">
+        <hr style=" box-shadow: 2px 2px 2px grey; z-index: 1;">
+        <hr style=" box-shadow: 2px 2px 2px grey;z-index: 1;">
+    </div> -->
+    <!-- <img src="https://t3.ftcdn.net/jpg/09/74/93/64/360_F_974936452_zMsdvroBfXqcAqsUwWJPHqcXIELWkxXI.jpg" alt="Background Image" style=" filter: blur(5px); height:auto; width: 100%; background-repeat: repeat;z-index: 0;"> -->
+
+<button id="showScreenOnChange_left" class="fas fa-angle-right" style="display: none;" onclick="showOnClick_left_button()"></button>
+<button id="showScreenOnChange_right" class="fas fa-angle-left" style="display: none;" onclick="showOnClick_right_button()"></button>
+<button id="closeButton_left" class="fas fa-angle-left" style="display: none;" onclick="hideOnClick_left_button()"></button>      
+<button id="closeButton_right" class="fas fa-angle-right closeButtonRight" style="display: none;" onclick="hideOnClick_right_button()"></button> 
+</body>
+</html>
