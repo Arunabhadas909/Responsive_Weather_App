@@ -2,7 +2,7 @@
 
 const url_1='https://api.openweathermap.org/data/2.5/weather';
 const url_2='https://api.openweathermap.org/data/2.5/forecast';
-const apiKey = '5e32f333244b126a863cb69bfa58eb76';
+const apiKey = '...';
 
 
 
